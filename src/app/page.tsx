@@ -107,8 +107,8 @@ export default function HomePage() {
                 Pakistan Concierge Medical Token Portal
               </div>
 
-              <h1 className="text-2xl sm:text-3xl lg:text-[36px] xl:text-[40px] font-extrabold tracking-tight text-[#061224] leading-snug">
-                Get Your <span className="gold-gradient-text">Wafid Medical Token</span> —<br className="hidden sm:inline" /> Fast &amp; Hassle-Free
+              <h1 className="text-2xl sm:text-3xl lg:text-[38px] xl:text-4xl font-extrabold tracking-tight text-[#061224] leading-snug">
+                Get Your <span className="gold-gradient-text">Wafid Medical Token</span><br className="hidden sm:block" /> — Fast &amp; Hassle-Free
               </h1>
 
               <p className="text-base sm:text-lg text-slate-700 max-w-2xl leading-relaxed mx-auto lg:mx-0 font-medium">
