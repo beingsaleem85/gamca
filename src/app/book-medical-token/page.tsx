@@ -41,7 +41,7 @@ export default function BookMedicalTokenPage() {
   const [formData, setFormData] = useState({
     examinationCountry: "Pakistan",
     city: "",
-    destinationCountry: "Saudi Arabia",
+    destinationCountry: "",
     appointmentType: "Standard Appointment",
     preferredAppointmentDate: "",
     firstName: "",
@@ -74,7 +74,7 @@ export default function BookMedicalTokenPage() {
     setFormData({
       examinationCountry: "Pakistan",
       city: "",
-      destinationCountry: "Saudi Arabia",
+      destinationCountry: "",
       appointmentType: "Standard Appointment",
       preferredAppointmentDate: "",
       firstName: "",
