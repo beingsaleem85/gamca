@@ -65,6 +65,10 @@ export default function BookMedicalTokenPage() {
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Step 1 Passport file state
+  const [passportFile, setPassportFile] = useState<File | null>(null);
+  const [passportPreview, setPassportPreview] = useState<string | null>(null);
+
   // Step 2 Screenshot state
   const [screenshotFile, setScreenshotFile] = useState<File | null>(null);
   const [screenshotPreview, setScreenshotPreview] = useState<string | null>(null);
@@ -96,6 +100,8 @@ export default function BookMedicalTokenPage() {
       confirmationChecked: false,
     });
     setErrors({});
+    setPassportFile(null);
+    setPassportPreview(null);
     setScreenshotFile(null);
     setScreenshotPreview(null);
     setApplicationId("");
@@ -257,6 +263,11 @@ export default function BookMedicalTokenPage() {
       newErrors.positionApplied = "Position Applied For must contain text only (numbers not allowed)";
     }
 
+    // Passport Copy File: MANDATORY
+    if (!passportFile) {
+      newErrors.passportFile = "Passport copy file attachment is required";
+    }
+
     if (!formData.confirmationChecked) {
       newErrors.confirmationChecked = "You must confirm that the information provided is accurate.";
     }
@@ -275,6 +286,38 @@ export default function BookMedicalTokenPage() {
       const el = document.getElementById(firstErrorKey);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
     }
+  };
+
+  // Step 1 Passport Copy Upload Handler
+  const handlePassportFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Passport file size exceeds 5MB limit. Please upload a smaller file.");
+        return;
+      }
+      const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg", "application/pdf"];
+      if (!allowedTypes.includes(file.type)) {
+        alert("Only PNG, JPG, JPEG, WEBP images, and PDF documents are allowed for Passport copy.");
+        return;
+      }
+      setPassportFile(file);
+      if (file.type.startsWith("image/")) {
+        setPassportPreview(URL.createObjectURL(file));
+      } else {
+        setPassportPreview(null);
+      }
+      setErrors((prev) => {
+        const copy = { ...prev };
+        delete copy.passportFile;
+        return copy;
+      });
+    }
+  };
+
+  const handleRemovePassportFile = () => {
+    setPassportFile(null);
+    setPassportPreview(null);
   };
 
   // Step 2 Screenshot Upload Handler
@@ -301,6 +344,12 @@ export default function BookMedicalTokenPage() {
 
   // Final Form Submit Handler
   const handleFinalSubmit = async () => {
+    if (!passportFile) {
+      alert("Please attach a passport copy before submitting.");
+      setStep(1);
+      return;
+    }
+
     if (!screenshotFile) {
       alert("Please attach a payment screenshot before submitting.");
       return;
@@ -314,6 +363,7 @@ export default function BookMedicalTokenPage() {
       Object.entries(formData).forEach(([key, val]) => {
         bodyData.append(key, String(val));
       });
+      bodyData.append("passportCopy", passportFile);
       bodyData.append("screenshot", screenshotFile);
 
       // Submit to Next.js API route
@@ -845,6 +895,95 @@ export default function BookMedicalTokenPage() {
                       />
                       {errors.positionApplied && (
                         <p className="mt-1 text-[11px] text-red-500">{errors.positionApplied}</p>
+                      )}
+                    </div>
+
+                    {/* Row 7: Attach Passport Copy (Image / PDF) */}
+                    <div id="passportFile" className="space-y-1.5">
+                      <label className="block text-xs font-semibold text-slate-700">
+                        Attach Passport Copy (Image or PDF) <span className="text-red-500">*</span>
+                      </label>
+
+                      {!passportFile ? (
+                        <div
+                          className={`border-2 border-dashed ${
+                            errors.passportFile ? "border-red-400 bg-red-50/20" : "border-slate-300 hover:border-amber-500/60"
+                          } rounded-xl p-5 text-center bg-slate-50 hover:bg-amber-500/5 transition-all cursor-pointer`}
+                        >
+                          <input
+                            type="file"
+                            id="passport-copy-input"
+                            accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
+                            onChange={handlePassportFileChange}
+                            className="hidden"
+                          />
+                          <label htmlFor="passport-copy-input" className="cursor-pointer block">
+                            <div className="w-10 h-10 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-2">
+                              <Upload className="w-5 h-5" />
+                            </div>
+                            <span className="text-xs font-bold text-slate-800 block mb-0.5">
+                              Click to choose or drag & drop Passport Copy
+                            </span>
+                            <span className="text-[11px] text-slate-500 block">
+                              PNG, JPG, JPEG, WEBP or PDF (Max 5MB)
+                            </span>
+                          </label>
+                        </div>
+                      ) : (
+                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4">
+                          {passportPreview ? (
+                            <div className="relative w-20 h-20 bg-slate-200 rounded-lg overflow-hidden border border-amber-500/40 flex-shrink-0">
+                              <Image
+                                src={passportPreview}
+                                alt="Passport Copy Preview"
+                                fill
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : (
+                            <div className="w-20 h-20 bg-amber-50 border border-amber-200 rounded-lg flex flex-col items-center justify-center text-amber-800 flex-shrink-0">
+                              <ShieldCheck className="w-8 h-8 text-amber-600" />
+                              <span className="text-[10px] font-bold mt-1">PDF DOC</span>
+                            </div>
+                          )}
+
+                          <div className="flex-1 text-center sm:text-left space-y-1">
+                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[11px] font-bold">
+                              <CheckCircle2 className="w-3 h-3" />
+                              Passport Copy Attached
+                            </span>
+                            <p className="text-xs font-bold text-slate-800 truncate">{passportFile.name}</p>
+                            <p className="text-[11px] text-slate-500">
+                              Size: {(passportFile.size / (1024 * 1024)).toFixed(2)} MB
+                            </p>
+                            <div className="pt-1 flex justify-center sm:justify-start gap-2">
+                              <label
+                                htmlFor="passport-copy-input-replace"
+                                className="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded text-xs font-semibold cursor-pointer transition-colors"
+                              >
+                                Replace
+                              </label>
+                              <input
+                                type="file"
+                                id="passport-copy-input-replace"
+                                accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
+                                onChange={handlePassportFileChange}
+                                className="hidden"
+                              />
+                              <button
+                                type="button"
+                                onClick={handleRemovePassportFile}
+                                className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 rounded text-xs font-semibold transition-colors flex items-center gap-1"
+                              >
+                                <X className="w-3 h-3" />
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                      {errors.passportFile && (
+                        <p className="mt-1 text-[11px] text-red-500 font-semibold">{errors.passportFile}</p>
                       )}
                     </div>
 

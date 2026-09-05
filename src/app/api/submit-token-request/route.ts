@@ -64,6 +64,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
+    // Extract passport copy file
+    const passportFile = formData.get("passportCopy") as File | null;
+    if (!passportFile || typeof passportFile === "string") {
+      return NextResponse.json(
+        { success: false, message: "Please attach a valid passport copy image or PDF." },
+        { status: 400 }
+      );
+    }
+
+    const allowedPassportTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg", "application/pdf"];
+    if (!allowedPassportTypes.includes(passportFile.type) || passportFile.size > 5 * 1024 * 1024) {
+      return NextResponse.json(
+        { success: false, message: "Passport copy must be a JPEG, PNG, WEBP, or PDF under 5MB." },
+        { status: 400 }
+      );
+    }
+
+    const passportArrayBuffer = await passportFile.arrayBuffer();
+    const passportBuffer = Buffer.from(passportArrayBuffer);
+    const passportFileName = `${applicationId}_PASSPORT_${passportFile.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
+
     // Extract screenshot file
     const screenshotFile = formData.get("screenshot") as File | null;
     if (!screenshotFile || typeof screenshotFile === "string") {
@@ -84,7 +105,7 @@ export async function POST(req: NextRequest) {
 
     const arrayBuffer = await screenshotFile.arrayBuffer();
     const screenshotBuffer = Buffer.from(arrayBuffer);
-    const screenshotFileName = `${applicationId}_${screenshotFile.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
+    const screenshotFileName = `${applicationId}_SCREENSHOT_${screenshotFile.name.replace(/[^a-zA-Z0-9._-]/g, "_")}`;
 
     // 1. Save to Supabase database (if configured)
     await saveRequestToSupabase({
@@ -209,9 +230,10 @@ export async function POST(req: NextRequest) {
         </div>
 
         <div class="section">
-          <div class="section-header">PAYMENT / ACCOUNT VERIFICATION</div>
-          <div class="row"><div class="label">Attached File:</div><div class="value">${screenshotFileName}</div></div>
-          <div class="row"><div class="label">Payment Submission Time:</div><div class="value">${new Date().toLocaleString()}</div></div>
+          <div class="section-header">ATTACHED DOCUMENTS (2 ATTACHMENTS)</div>
+          <div class="row"><div class="label">1. Passport Copy:</div><div class="value">${passportFileName}</div></div>
+          <div class="row"><div class="label">2. Payment Screenshot:</div><div class="value">${screenshotFileName}</div></div>
+          <div class="row"><div class="label">Submission Time:</div><div class="value">${new Date().toLocaleString()}</div></div>
         </div>
 
         <div class="footer">
@@ -237,6 +259,10 @@ export async function POST(req: NextRequest) {
         subject: `New Gamca Token Request — ${firstName} ${lastName} — ${passportNumber}`,
         html: htmlBody,
         attachments: [
+          {
+            filename: passportFileName,
+            content: passportBuffer,
+          },
           {
             filename: screenshotFileName,
             content: screenshotBuffer,

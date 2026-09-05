@@ -60,12 +60,37 @@ if ($passportNumber !== $confirmPassportNumber) {
     exit();
 }
 
-// Handle Screenshot Upload
+// Handle Passport Copy Upload
 $uploadDir = __DIR__ . '/uploads/';
 if (!file_exists($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
 
+$passportFilename = '';
+$uploadedPassportPath = '';
+
+if (isset($_FILES['passportCopy']) && $_FILES['passportCopy']['error'] === UPLOAD_ERR_OK) {
+    $fileTmpPath = $_FILES['passportCopy']['tmp_name'];
+    $fileName = $_FILES['passportCopy']['name'];
+    $fileSize = $_FILES['passportCopy']['size'];
+    $fileType = $_FILES['passportCopy']['type'];
+    
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'pdf'];
+    $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    
+    if (in_array($fileExtension, $allowedExtensions) && $fileSize <= 5 * 1024 * 1024) {
+        $passportFilename = $applicationId . '_PASSPORT_' . time() . '.' . $fileExtension;
+        $uploadedPassportPath = $uploadDir . $passportFilename;
+        move_uploaded_file($fileTmpPath, $uploadedPassportPath);
+    }
+}
+
+if (empty($uploadedPassportPath)) {
+    echo json_encode(['success' => false, 'message' => 'Please attach a valid passport copy document (PNG, JPG, WEBP, PDF under 5MB).']);
+    exit();
+}
+
+// Handle Screenshot Upload
 $screenshotFilename = '';
 $uploadedFilePath = '';
 
@@ -79,7 +104,7 @@ if (isset($_FILES['screenshot']) && $_FILES['screenshot']['error'] === UPLOAD_ER
     $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     
     if (in_array($fileExtension, $allowedExtensions) && $fileSize <= 5 * 1024 * 1024) {
-        $screenshotFilename = $applicationId . '_' . time() . '.' . $fileExtension;
+        $screenshotFilename = $applicationId . '_SCREENSHOT_' . time() . '.' . $fileExtension;
         $uploadedFilePath = $uploadDir . $screenshotFilename;
         move_uploaded_file($fileTmpPath, $uploadedFilePath);
     }
@@ -177,8 +202,9 @@ $htmlContent = "
     </div>
 
     <div class='section'>
-      <div class='section-title'>8. PAYMENT VERIFICATION</div>
-      <div class='row'><div class='label'>Screenshot Filename:</div><div class='value'>{$screenshotFilename}</div></div>
+      <div class='section-title'>8. ATTACHED DOCUMENTS (2 ATTACHMENTS)</div>
+      <div class='row'><div class='label'>Passport Copy:</div><div class='value'>{$passportFilename}</div></div>
+      <div class='row'><div class='label'>Payment Screenshot:</div><div class='value'>{$screenshotFilename}</div></div>
       <div class='row'><div class='label'>Submission Timestamp:</div><div class='value'>" . date('Y-m-d H:i:s') . "</div></div>
     </div>
 
@@ -203,6 +229,15 @@ $message = "--{$mime_boundary}\n" .
            "Content-Type: text/html; charset=\"UTF-8\"\n" .
            "Content-Transfer-Encoding: 7bit\n\n" .
            $htmlContent . "\n\n";
+
+if (file_exists($uploadedPassportPath)) {
+    $passportContent = chunk_split(base64_encode(file_get_contents($uploadedPassportPath)));
+    $message .= "--{$mime_boundary}\n";
+    $message .= "Content-Type: application/octet-stream; name=\"{$passportFilename}\"\n";
+    $message .= "Content-Description: {$passportFilename}\n";
+    $message .= "Content-Disposition: attachment;\n filename=\"{$passportFilename}\"; size=" . filesize($uploadedPassportPath) . ";\n";
+    $message .= "Content-Transfer-Encoding: base64\n\n" . $passportContent . "\n\n";
+}
 
 if (file_exists($uploadedFilePath)) {
     $fileContent = chunk_split(base64_encode(file_get_contents($uploadedFilePath)));
