@@ -189,19 +189,36 @@ export default function WafidDatePicker({
   return (
     <div ref={containerRef} className="relative w-full inline-block">
       
-      {/* Trigger Input Box */}
-      <div
+      {/* Trigger Button Input Box (Keyboard Tabbable & Auto-Open on Focus) */}
+      <button
+        type="button"
         id={id}
-        onClick={toggleOpen}
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+          setViewMode("days");
+        }}
+        onFocus={() => {
+          setIsOpen(true);
+          setViewMode("days");
+        }}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen((prev) => !prev);
+            setViewMode("days");
+          }
+        }}
         className={`w-full px-3.5 py-2.5 bg-white border ${
-          error ? "border-red-500 bg-red-50/20" : "border-slate-300 hover:border-slate-400"
-        } rounded-lg text-xs font-medium text-slate-800 flex items-center justify-between cursor-pointer transition-all ${className}`}
+          error
+            ? "border-red-500 bg-red-50/20 focus:ring-red-500/40"
+            : "border-slate-300 hover:border-slate-400 focus:border-amber-500 focus:ring-amber-500/40"
+        } rounded-lg text-xs font-medium text-slate-800 flex items-center justify-between cursor-pointer focus:ring-2 focus:outline-none transition-all ${className}`}
       >
         <span className={value ? "text-slate-800 font-semibold" : "text-slate-400"}>
           {value ? formatDisplayDate(value) : placeholder}
         </span>
         <CalendarIcon className="w-4 h-4 text-slate-500 flex-shrink-0 ml-2" />
-      </div>
+      </button>
 
       {/* Custom Popover Calendar Modal */}
       {isOpen && (
