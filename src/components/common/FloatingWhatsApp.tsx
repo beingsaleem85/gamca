@@ -16,10 +16,10 @@ export default function FloatingWhatsApp() {
         href={siteConfig.contact.whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-14 h-14 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 hover:scale-105 transition-all duration-300 animate-whatsapp border-2 border-white/40"
+        className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-2xl shadow-[#25D366]/50 hover:scale-110 transition-all duration-300 animate-whatsapp border border-slate-200 p-1"
         aria-label="Chat with us on WhatsApp"
       >
-        <WhatsAppIcon className="w-8 h-8 fill-current" />
+        <WhatsAppIcon className="w-full h-full rounded-xl" />
       </a>
     </div>
   );

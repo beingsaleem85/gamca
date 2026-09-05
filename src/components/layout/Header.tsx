@@ -174,10 +174,10 @@ export default function Header() {
               href={siteConfig.contact.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-xl bg-[#25D366] text-white hover:bg-[#20ba5a] transition-all shadow-md shadow-[#25D366]/20"
+              className="p-1 rounded-xl bg-white hover:bg-slate-50 transition-all shadow-md border border-slate-200 flex items-center justify-center hover:scale-105"
               title="Chat on WhatsApp"
             >
-              <WhatsAppIcon className="w-5 h-5 fill-current" />
+              <WhatsAppIcon className="w-8 h-8 rounded-lg" />
             </a>
             <Link
               href="/book-medical-token"
@@ -199,10 +199,10 @@ export default function Header() {
               href={siteConfig.contact.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 rounded-lg bg-[#25D366] text-white shadow-sm"
+              className="p-1 rounded-lg bg-white border border-slate-200 shadow-sm flex items-center justify-center"
               title="Chat on WhatsApp"
             >
-              <WhatsAppIcon className="w-5 h-5 fill-current" />
+              <WhatsAppIcon className="w-7 h-7 rounded-md" />
             </a>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
