@@ -91,110 +91,91 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#FAF9F6] pt-20">
       
       {/* 1. HOMEPAGE HERO SECTION */}
-      <section className="relative bg-gradient-to-b from-[#FAF9F6] via-white to-[#F3F4F6] text-[#061224] pt-16 pb-24 border-b border-slate-200 overflow-hidden">
-        {/* Subtle Background Glow Elements */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-3xl pointer-events-none"></div>
+      <section className="relative bg-slate-950 text-white pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-amber-500/30 overflow-hidden">
+        {/* Background Image with Dark Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/hero-banner.png"
+            alt="Wafid Medical Token Assistance"
+            fill
+            className="object-cover object-center opacity-35"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#061224]/90 via-[#061224]/85 to-[#061224]/95"></div>
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold text-amber-800 uppercase tracking-widest">
-                <ShieldCheck className="w-4 h-4 text-amber-600" />
-                Pakistan Concierge Medical Token Portal
+            {/* Left Side: Visual Banner Preview on Desktop */}
+            <div className="lg:col-span-5 hidden lg:flex justify-center">
+              <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden border-2 border-amber-500/40 shadow-2xl group">
+                <Image
+                  src="/hero-banner.png"
+                  alt="Candidate with Passport and Wafid Medical Token"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-500/90 text-[#061224] rounded-full text-[10px] font-extrabold uppercase tracking-wider">
+                    <ShieldCheck className="w-3.5 h-3.5" /> Official Wafid Assistance
+                  </span>
+                  <p className="text-base font-extrabold text-white">GAMCA & Wafid Token Slip</p>
+                  <p className="text-xs text-slate-300">Authorized Concierge Portal Pakistan</p>
+                </div>
               </div>
-
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#061224] leading-tight">
-                Get Your <span className="gold-gradient-text">Wafid Medical Token</span> — Fast & Hassle-Free
-              </h1>
-
-              <p className="text-base sm:text-lg text-slate-700 max-w-2xl leading-relaxed mx-auto lg:mx-0 font-medium">
-                Your trusted assistance for Wafid/GAMCA medical appointment token processing in Pakistan. Premium, reliable, and priority concierge support for all GCC candidates.
-              </p>
-
-              {/* CTAs */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link
-                  href="/book-medical-token"
-                  className="gold-btn w-full sm:w-auto px-8 py-4 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-3 shadow-xl"
-                >
-                  <ShieldCheck className="w-5 h-5" />
-                  <span>Get Medical Token</span>
-                </Link>
-
-                <a
-                  href={siteConfig.contact.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto px-8 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-xl text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-3 transition-all shadow-lg shadow-[#25D366]/30"
-                >
-                  <WhatsAppIcon className="w-5 h-5 fill-current" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
-
-              {/* Trust Subtext */}
-              <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-600 font-bold">
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> Fast Assistance
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> All Pakistan Cities
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> Official Format Support
-                </span>
-              </div>
-
             </div>
 
-            {/* Right Card / Logo Showcase Column */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md bg-white p-8 rounded-3xl border border-amber-500/30 shadow-2xl space-y-6">
+            {/* Right Side: Black Overlay Card with Exact Text & Prominent Fee Badge */}
+            <div className="lg:col-span-7 flex justify-center lg:justify-end">
+              <div className="w-full max-w-2xl bg-[#061224]/95 backdrop-blur-md p-6 sm:p-10 rounded-3xl border-2 border-amber-500/30 shadow-2xl space-y-6 text-center text-white">
                 
-                <div className="flex items-center justify-center">
-                  <div className="relative w-28 h-28 bg-slate-50 rounded-2xl p-2 border-2 border-amber-400/50 shadow-md">
-                    <Image
-                      src={siteConfig.logo.src}
-                      alt={siteConfig.logo.alt}
-                      fill
-                      className="object-contain p-1"
-                      priority
-                    />
-                  </div>
+                {/* Headline 1 */}
+                <h2 className="text-base sm:text-xl lg:text-2xl font-bold text-slate-100 tracking-wide leading-snug">
+                  Book Your Wafid and Gamca Medical Appointment Token Slip.
+                </h2>
+
+                {/* Headline 2 */}
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-tight tracking-tight">
+                  GAMCA is the authorized platform for <span className="gold-gradient-text">Gulf Health Council</span>
+                </h1>
+
+                {/* Pipeline Bar */}
+                <div className="py-3 px-4 bg-slate-900/90 rounded-xl border border-slate-800 text-xs sm:text-sm font-bold text-amber-400 tracking-wide">
+                  Fill Your Form &nbsp;|&nbsp; Pay Fee &nbsp;|&nbsp; Get Your Appointment &nbsp;|&nbsp; Check Medical Status
                 </div>
 
-                <div className="text-center space-y-1">
-                  <h3 className="text-xl font-extrabold text-[#061224] tracking-wide">{siteConfig.name}</h3>
-                  <p className="text-xs text-amber-700 uppercase tracking-widest font-bold">{siteConfig.tagline}</p>
+                {/* Prominent Fee Badge (Clear & High Contrast) */}
+                <div className="pt-2 flex flex-col items-center justify-center space-y-2">
+                  <div className="w-full sm:w-auto bg-[#00C853] hover:bg-[#00E676] text-white px-8 py-4 rounded-2xl font-black text-2xl sm:text-3xl lg:text-4xl tracking-wider shadow-2xl shadow-emerald-500/40 border-2 border-white/40 flex items-center justify-center gap-3 transform hover:scale-105 transition-all cursor-pointer">
+                    <span>Token Fee {siteConfig.paymentInfo.tokenFee}</span>
+                  </div>
+                  <span className="text-[11px] font-semibold text-slate-400">
+                    Official Appointment Token Assistance Fee in Pakistan
+                  </span>
                 </div>
 
-                <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-3 text-xs">
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500 font-medium">Coverage:</span>
-                    <span className="text-amber-800 font-bold">All 14+ Pakistan Cities</span>
-                  </div>
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-                    <span className="text-slate-500 font-medium">Destinations:</span>
-                    <span className="text-[#061224] font-bold">KSA, UAE, Qatar, Kuwait +</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-slate-500 font-medium">Verification:</span>
-                    <span className="text-emerald-700 font-bold flex items-center gap-1">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> 2-Step Secure Flow
-                    </span>
-                  </div>
-                </div>
+                {/* Action CTAs */}
+                <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link
+                    href="/book-medical-token"
+                    className="gold-btn w-full sm:w-auto px-8 py-4 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-3 shadow-xl"
+                  >
+                    <ShieldCheck className="w-5 h-5" />
+                    <span>Get Medical Token Now</span>
+                  </Link>
 
-                <Link
-                  href="/book-medical-token"
-                  className="block w-full py-3.5 bg-[#061224] hover:bg-amber-600 text-white hover:text-[#061224] text-center font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition-colors"
-                >
-                  Start Token Application
-                </Link>
+                  <a
+                    href={siteConfig.contact.whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto px-8 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-xl text-xs font-extrabold uppercase tracking-wider flex items-center justify-center gap-3 transition-all shadow-lg shadow-[#25D366]/30"
+                  >
+                    <WhatsAppIcon className="w-5 h-5 fill-current" />
+                    <span>Chat on WhatsApp</span>
+                  </a>
+                </div>
 
               </div>
             </div>
