@@ -88,10 +88,10 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] pt-20">
+    <div className="min-h-screen bg-[#FAF9F6] pt-20 overflow-x-hidden w-full max-w-full">
       
       {/* 1. HOMEPAGE HERO SECTION */}
-      <section className="relative bg-gradient-to-b from-[#FAF9F6] via-white to-[#F3F4F6] text-[#061224] pt-16 pb-24 border-b border-slate-200 overflow-hidden">
+      <section className="relative bg-gradient-to-b from-[#FAF9F6] via-white to-[#F3F4F6] text-[#061224] pt-16 pb-24 border-b border-slate-200 overflow-hidden w-full max-w-full">
         {/* Subtle Background Glow Elements */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-blue-600/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -102,9 +102,9 @@ export default function HomePage() {
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold text-amber-800 uppercase tracking-widest">
-                <ShieldCheck className="w-4 h-4 text-amber-600" />
-                Pakistan Concierge Medical Token Portal
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold text-amber-800 uppercase tracking-widest max-w-full">
+                <ShieldCheck className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                <span className="truncate">Pakistan Concierge Medical Token Portal</span>
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-[38px] xl:text-4xl font-extrabold tracking-tight text-[#061224] leading-snug">
@@ -116,20 +116,20 @@ export default function HomePage() {
               </p>
 
               {/* Fee & Step Banner from User Spec */}
-              <div className="pt-2 pb-1 space-y-4">
-                <p className="text-xs sm:text-sm font-bold text-slate-800 max-w-2xl leading-relaxed">
+              <div className="pt-2 pb-1 space-y-4 max-w-full">
+                <p className="text-xs sm:text-sm font-bold text-slate-800 max-w-2xl leading-relaxed break-words">
                   Fill Your Form <span className="text-slate-400 font-normal">|</span> Pay Fee <span className="text-slate-400 font-normal">|</span> Get Your Appointment <span className="text-slate-400 font-normal">|</span> Check Medical Status and Report Online
                 </p>
 
                 <div>
-                  <div className="inline-block bg-[#00C853] text-white px-6 py-2.5 rounded-lg text-lg sm:text-2xl font-extrabold tracking-wide shadow-lg shadow-[#00C853]/30">
+                  <div className="inline-block bg-[#00C853] text-white px-4 sm:px-6 py-2.5 rounded-lg text-base sm:text-2xl font-extrabold tracking-wide shadow-lg shadow-[#00C853]/30 max-w-full">
                     Token Fee Rs: 4,500/-
                   </div>
                 </div>
               </div>
 
               {/* CTAs */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 max-w-full">
                 <Link
                   href="/book-medical-token"
                   className="gold-btn w-full sm:w-auto px-8 py-4 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-3 shadow-xl"
@@ -150,14 +150,14 @@ export default function HomePage() {
               </div>
 
               {/* Trust Subtext */}
-              <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-slate-600 font-bold">
-                <span className="flex items-center gap-1.5">
+              <div className="pt-6 flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-6 text-xs text-slate-600 font-bold max-w-full">
+                <span className="flex items-center gap-1.5 whitespace-nowrap">
                   <CheckCircle2 className="w-4 h-4 text-amber-600" /> Fast Assistance
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 whitespace-nowrap">
                   <CheckCircle2 className="w-4 h-4 text-amber-600" /> All Pakistan Cities
                 </span>
-                <span className="flex items-center gap-1.5">
+                <span className="flex items-center gap-1.5 whitespace-nowrap">
                   <CheckCircle2 className="w-4 h-4 text-amber-600" /> Official Format Support
                 </span>
               </div>
@@ -165,8 +165,8 @@ export default function HomePage() {
             </div>
 
             {/* Right Card / Logo Showcase Column */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative w-full max-w-md bg-white p-8 rounded-3xl border border-amber-500/30 shadow-2xl space-y-6">
+            <div className="lg:col-span-5 flex justify-center w-full">
+              <div className="relative w-full max-w-md bg-white p-6 sm:p-8 rounded-3xl border border-amber-500/30 shadow-2xl space-y-6">
                 
                 <div className="flex items-center justify-center">
                   <div className="relative w-28 h-28 bg-slate-50 rounded-2xl p-2 border-2 border-amber-400/50 shadow-md">
@@ -221,28 +221,28 @@ export default function HomePage() {
       </section>
 
       {/* 2. QUICK TRUST STRIP */}
-      <section className="bg-white py-8 border-b border-slate-200">
+      <section className="bg-white py-8 border-b border-slate-200 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 text-center">
             
-            <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
+            <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">100%</span>
-              <span className="text-xs text-amber-900 font-bold uppercase tracking-wider">Wafid Compliant</span>
+              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">Wafid Compliant</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
+            <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">14+</span>
-              <span className="text-xs text-amber-900 font-bold uppercase tracking-wider">Pakistan Cities</span>
+              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">Pakistan Cities</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
+            <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">7 GCC</span>
-              <span className="text-xs text-amber-900 font-bold uppercase tracking-wider">Countries Supported</span>
+              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">Countries</span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
+            <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
               <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">24/7</span>
-              <span className="text-xs text-amber-900 font-bold uppercase tracking-wider">WhatsApp Support</span>
+              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">WhatsApp Support</span>
             </div>
 
           </div>
@@ -250,7 +250,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. GET MEDICAL TOKEN CTA STRIP */}
-      <section className="py-12 bg-[#061224] text-white">
+      <section className="py-12 bg-[#061224] text-white w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
@@ -271,7 +271,7 @@ export default function HomePage() {
       </section>
 
       {/* 4. GCC COUNTRIES GRID */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-14">
@@ -319,7 +319,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. HOW IT WORKS SECTION */}
-      <section className="py-20 bg-[#FAF9F6]">
+      <section className="py-20 bg-[#FAF9F6] w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -353,7 +353,7 @@ export default function HomePage() {
       </section>
 
       {/* 6. WHY GAMCA CENTRE */}
-      <section className="py-20 bg-white text-[#061224] border-t border-slate-200">
+      <section className="py-20 bg-white text-[#061224] border-t border-slate-200 w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -390,7 +390,7 @@ export default function HomePage() {
       </section>
 
       {/* 7. MEDICAL CENTERS PREVIEW */}
-      <section className="py-20 bg-[#FAF9F6]">
+      <section className="py-20 bg-[#FAF9F6] w-full max-w-full overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
@@ -445,7 +445,7 @@ export default function HomePage() {
       </section>
 
       {/* 8. FAQS ACCORDION SECTION */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-white w-full max-w-full overflow-hidden">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-14">
@@ -482,7 +482,7 @@ export default function HomePage() {
       </section>
 
       {/* 9. FINAL CTA BANNER */}
-      <section className="py-20 bg-[#061224] text-white">
+      <section className="py-20 bg-[#061224] text-white w-full max-w-full overflow-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
             Get Your Wafid Medical Token Today

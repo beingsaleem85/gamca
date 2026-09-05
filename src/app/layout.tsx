@@ -73,9 +73,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
         />
       </head>
-      <body className="antialiased selection:bg-amber-500/30 selection:text-amber-900">
+      <body className="antialiased selection:bg-amber-500/30 selection:text-amber-900 overflow-x-hidden w-full max-w-full">
         <Header />
-        <main className="min-h-screen">{children}</main>
+        <main className="min-h-screen overflow-x-hidden w-full max-w-full">{children}</main>
         <Footer />
         <FloatingWhatsApp />
       </body>
