@@ -18,7 +18,6 @@ export const siteConfig = {
     alt: "Gamca Centre Logo",
   },
   paymentInfo: {
-    tokenFee: "Rs: 4,500/-",
     qrImageSrc: "/payment-qr.png",
     accountName: "Gamca Centre Assistance",
     bankName: "Meezan Bank / EasyPaisa / JazzCash",
