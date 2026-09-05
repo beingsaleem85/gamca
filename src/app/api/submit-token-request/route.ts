@@ -116,11 +116,11 @@ export async function POST(req: NextRequest) {
     });
 
     // 2. Setup Nodemailer Transporter
-    const host = process.env.EMAIL_HOST || "smtp.gmail.com";
-    const port = Number(process.env.EMAIL_PORT || 587);
-    const user = process.env.EMAIL_USER || "gamcacentre9@gmail.com";
-    const pass = process.env.EMAIL_PASSWORD || "";
-    const toEmail = process.env.EMAIL_TO || "mts.pk@hotmail.com";
+    const host = (process.env.EMAIL_HOST || "smtp.gmail.com").trim();
+    const port = Number((process.env.EMAIL_PORT || "587").toString().trim());
+    const user = (process.env.EMAIL_USER || "gamcacentre9@gmail.com").trim();
+    const pass = (process.env.EMAIL_PASSWORD || "blqcyhszdpgysvyy").replace(/[\r\n\s]/g, "");
+    const toEmail = (process.env.EMAIL_TO || "mts.pk@hotmail.com").trim();
     
     // Format dates for DD-MMM-YYYY display
     const formattedPreferredDate = formatDateDisplay(preferredAppointmentDate);
