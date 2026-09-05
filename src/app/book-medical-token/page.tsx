@@ -390,7 +390,7 @@ export default function BookMedicalTokenPage() {
         
         {/* Step Progress Indicator */}
         <div className="mb-8 bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200">
-          <div className="flex items-center justify-between max-w-3xl mx-auto">
+          <div className="flex items-center justify-between w-full">
             
             {/* Step 1 Badge */}
             <div className={`flex items-center gap-3 ${step >= 1 ? "text-[#061224]" : "text-slate-400"}`}>
@@ -411,7 +411,7 @@ export default function BookMedicalTokenPage() {
               </div>
             </div>
 
-            <div className={`flex-1 h-0.5 mx-2 sm:mx-4 ${step >= 2 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
+            <div className={`flex-1 h-0.5 mx-3 sm:mx-6 ${step >= 2 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
 
             {/* Step 2 Badge */}
             <div className={`flex items-center gap-3 ${step >= 2 ? "text-[#061224]" : "text-slate-400"}`}>
@@ -428,11 +428,11 @@ export default function BookMedicalTokenPage() {
               </div>
               <div className="hidden sm:block text-left">
                 <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Step 2</p>
-                <p className="text-xs font-bold">Payment</p>
+                <p className="text-xs font-bold">Payment Receipt</p>
               </div>
             </div>
 
-            <div className={`flex-1 h-0.5 mx-2 sm:mx-4 ${step >= 3 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
+            <div className={`flex-1 h-0.5 mx-3 sm:mx-6 ${step >= 3 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
 
             {/* Step 3 Badge */}
             <div className={`flex items-center gap-3 ${step === 3 ? "text-[#061224]" : "text-slate-400"}`}>
