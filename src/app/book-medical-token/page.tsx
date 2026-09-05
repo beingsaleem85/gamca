@@ -263,11 +263,6 @@ export default function BookMedicalTokenPage() {
       newErrors.positionApplied = "Position Applied For must contain text only (numbers not allowed)";
     }
 
-    // Passport Copy File: MANDATORY
-    if (!passportFile) {
-      newErrors.passportFile = "Passport copy file attachment is required";
-    }
-
     if (!formData.confirmationChecked) {
       newErrors.confirmationChecked = "You must confirm that the information provided is accurate.";
     }
@@ -898,95 +893,6 @@ export default function BookMedicalTokenPage() {
                       )}
                     </div>
 
-                    {/* Row 7: Attach Passport Copy (Image / PDF) */}
-                    <div id="passportFile" className="space-y-1.5">
-                      <label className="block text-xs font-semibold text-slate-700">
-                        Attach Passport Copy (Image or PDF) <span className="text-red-500">*</span>
-                      </label>
-
-                      {!passportFile ? (
-                        <div
-                          className={`border-2 border-dashed ${
-                            errors.passportFile ? "border-red-400 bg-red-50/20" : "border-slate-300 hover:border-amber-500/60"
-                          } rounded-xl p-5 text-center bg-slate-50 hover:bg-amber-500/5 transition-all cursor-pointer`}
-                        >
-                          <input
-                            type="file"
-                            id="passport-copy-input"
-                            accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
-                            onChange={handlePassportFileChange}
-                            className="hidden"
-                          />
-                          <label htmlFor="passport-copy-input" className="cursor-pointer block">
-                            <div className="w-10 h-10 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-2">
-                              <Upload className="w-5 h-5" />
-                            </div>
-                            <span className="text-xs font-bold text-slate-800 block mb-0.5">
-                              Click to choose or drag & drop Passport Copy
-                            </span>
-                            <span className="text-[11px] text-slate-500 block">
-                              PNG, JPG, JPEG, WEBP or PDF (Max 5MB)
-                            </span>
-                          </label>
-                        </div>
-                      ) : (
-                        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col sm:flex-row items-center gap-4">
-                          {passportPreview ? (
-                            <div className="relative w-20 h-20 bg-slate-200 rounded-lg overflow-hidden border border-amber-500/40 flex-shrink-0">
-                              <Image
-                                src={passportPreview}
-                                alt="Passport Copy Preview"
-                                fill
-                                className="object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="w-20 h-20 bg-amber-50 border border-amber-200 rounded-lg flex flex-col items-center justify-center text-amber-800 flex-shrink-0">
-                              <ShieldCheck className="w-8 h-8 text-amber-600" />
-                              <span className="text-[10px] font-bold mt-1">PDF DOC</span>
-                            </div>
-                          )}
-
-                          <div className="flex-1 text-center sm:text-left space-y-1">
-                            <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[11px] font-bold">
-                              <CheckCircle2 className="w-3 h-3" />
-                              Passport Copy Attached
-                            </span>
-                            <p className="text-xs font-bold text-slate-800 truncate">{passportFile.name}</p>
-                            <p className="text-[11px] text-slate-500">
-                              Size: {(passportFile.size / (1024 * 1024)).toFixed(2)} MB
-                            </p>
-                            <div className="pt-1 flex justify-center sm:justify-start gap-2">
-                              <label
-                                htmlFor="passport-copy-input-replace"
-                                className="px-3 py-1 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded text-xs font-semibold cursor-pointer transition-colors"
-                              >
-                                Replace
-                              </label>
-                              <input
-                                type="file"
-                                id="passport-copy-input-replace"
-                                accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
-                                onChange={handlePassportFileChange}
-                                className="hidden"
-                              />
-                              <button
-                                type="button"
-                                onClick={handleRemovePassportFile}
-                                className="px-3 py-1 bg-red-100 hover:bg-red-200 text-red-700 rounded text-xs font-semibold transition-colors flex items-center gap-1"
-                              >
-                                <X className="w-3 h-3" />
-                                Remove
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                      {errors.passportFile && (
-                        <p className="mt-1 text-[11px] text-red-500 font-semibold">{errors.passportFile}</p>
-                      )}
-                    </div>
-
                   </div>
                 </fieldset>
 
@@ -1103,67 +1009,162 @@ export default function BookMedicalTokenPage() {
               </div>
             </div>
 
-            {/* Upload Payment Screenshot Card */}
-            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200">
-              <div className="flex items-center gap-3 pb-4 mb-6 border-b border-slate-100">
+            {/* Upload Required Documents & Payment Screenshot Card (2 Columns) */}
+            <div className="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 space-y-6">
+              <div className="flex items-center gap-3 pb-4 border-b border-slate-100">
                 <div className="p-2 bg-amber-500/10 rounded-lg text-amber-700">
                   <Upload className="w-5 h-5" />
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-[#061224]">Upload Payment Confirmation Screenshot</h2>
-                  <p className="text-xs text-slate-500">Attach a clear screenshot of your transfer transaction receipt.</p>
+                  <h2 className="text-lg font-bold text-[#061224]">Upload Passport & Payment Screenshot</h2>
+                  <p className="text-xs text-slate-500">Please attach a clear copy of your Passport document and Payment transfer receipt.</p>
                 </div>
               </div>
 
-              {!screenshotPreview ? (
-                <div className="border-2 border-dashed border-slate-300 hover:border-amber-500/60 rounded-2xl p-8 text-center bg-slate-50 hover:bg-amber-500/5 transition-all cursor-pointer">
-                  <input
-                    type="file"
-                    id="screenshot-input"
-                    accept="image/png, image/jpeg, image/jpg, image/webp"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-                  <label htmlFor="screenshot-input" className="cursor-pointer block">
-                    <div className="w-16 h-16 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Upload className="w-8 h-8" />
-                    </div>
-                    <span className="text-sm font-bold text-slate-800 block mb-1">
-                      Click to choose or drag & drop payment screenshot
-                    </span>
-                    <span className="text-xs text-slate-500 block">
-                      PNG, JPG, JPEG or WEBP (Max 5MB)
-                    </span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                {/* Column 1: Passport Copy Upload */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    1. Passport Copy (Image or PDF) <span className="text-red-500">*</span>
                   </label>
-                </div>
-              ) : (
-                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6">
-                  <div className="flex flex-col sm:flex-row items-center gap-6">
-                    <div className="relative w-40 h-40 bg-slate-200 rounded-xl overflow-hidden border-2 border-amber-500/40 flex-shrink-0">
-                      <Image
-                        src={screenshotPreview}
-                        alt="Payment Screenshot Preview"
-                        fill
-                        className="object-cover"
+
+                  {!passportFile ? (
+                    <div className="border-2 border-dashed border-slate-300 hover:border-amber-500/60 rounded-2xl p-6 text-center bg-slate-50 hover:bg-amber-500/5 transition-all cursor-pointer h-56 flex flex-col items-center justify-center">
+                      <input
+                        type="file"
+                        id="passport-copy-input-step2"
+                        accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
+                        onChange={handlePassportFileChange}
+                        className="hidden"
                       />
+                      <label htmlFor="passport-copy-input-step2" className="cursor-pointer block w-full">
+                        <div className="w-12 h-12 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <Upload className="w-6 h-6" />
+                        </div>
+                        <span className="text-xs font-bold text-slate-800 block mb-1">
+                          Click to choose or drag & drop Passport Copy
+                        </span>
+                        <span className="text-[11px] text-slate-500 block">
+                          PNG, JPG, JPEG, WEBP or PDF (Max 5MB)
+                        </span>
+                      </label>
                     </div>
+                  ) : (
+                    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 h-56 flex flex-col justify-between">
+                      <div className="flex items-center gap-4">
+                        {passportPreview ? (
+                          <div className="relative w-20 h-20 bg-slate-200 rounded-xl overflow-hidden border-2 border-amber-500/40 flex-shrink-0">
+                            <Image
+                              src={passportPreview}
+                              alt="Passport Copy Preview"
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-20 h-20 bg-amber-50 border border-amber-200 rounded-xl flex flex-col items-center justify-center text-amber-800 flex-shrink-0">
+                            <ShieldCheck className="w-8 h-8 text-amber-600" />
+                            <span className="text-[10px] font-bold mt-1">PDF DOC</span>
+                          </div>
+                        )}
 
-                    <div className="flex-1 space-y-2 text-center sm:text-left">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">
-                        <CheckCircle2 className="w-3.5 h-3.5" />
-                        Screenshot Attached
-                      </span>
-                      <p className="text-sm font-bold text-slate-800 truncate">
-                        {screenshotFile?.name}
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        Size: {(screenshotFile!.size / (1024 * 1024)).toFixed(2)} MB
-                      </p>
+                        <div className="flex-1 space-y-1 overflow-hidden">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[11px] font-bold">
+                            <CheckCircle2 className="w-3 h-3" />
+                            Passport Attached
+                          </span>
+                          <p className="text-xs font-bold text-slate-800 truncate">{passportFile.name}</p>
+                          <p className="text-[11px] text-slate-500">
+                            Size: {(passportFile.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
 
-                      <div className="pt-3 flex flex-wrap justify-center sm:justify-start gap-3">
+                      <div className="pt-2 flex gap-2 border-t border-slate-200">
+                        <label
+                          htmlFor="passport-copy-input-replace-step2"
+                          className="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-semibold cursor-pointer transition-colors text-center"
+                        >
+                          Replace Passport
+                        </label>
+                        <input
+                          type="file"
+                          id="passport-copy-input-replace-step2"
+                          accept="image/png, image/jpeg, image/jpg, image/webp, application/pdf"
+                          onChange={handlePassportFileChange}
+                          className="hidden"
+                        />
+                        <button
+                          type="button"
+                          onClick={handleRemovePassportFile}
+                          className="flex-1 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                          Remove
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Column 2: Payment Screenshot Upload */}
+                <div className="space-y-2">
+                  <label className="block text-xs font-bold text-slate-800 uppercase tracking-wider">
+                    2. Payment Screenshot <span className="text-red-500">*</span>
+                  </label>
+
+                  {!screenshotPreview ? (
+                    <div className="border-2 border-dashed border-slate-300 hover:border-amber-500/60 rounded-2xl p-6 text-center bg-slate-50 hover:bg-amber-500/5 transition-all cursor-pointer h-56 flex flex-col items-center justify-center">
+                      <input
+                        type="file"
+                        id="screenshot-input"
+                        accept="image/png, image/jpeg, image/jpg, image/webp"
+                        onChange={handleFileChange}
+                        className="hidden"
+                      />
+                      <label htmlFor="screenshot-input" className="cursor-pointer block w-full">
+                        <div className="w-12 h-12 bg-amber-500/10 text-amber-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <Upload className="w-6 h-6" />
+                        </div>
+                        <span className="text-xs font-bold text-slate-800 block mb-1">
+                          Click to choose or drag & drop Screenshot
+                        </span>
+                        <span className="text-[11px] text-slate-500 block">
+                          PNG, JPG, JPEG or WEBP (Max 5MB)
+                        </span>
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 h-56 flex flex-col justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="relative w-20 h-20 bg-slate-200 rounded-xl overflow-hidden border-2 border-amber-500/40 flex-shrink-0">
+                          <Image
+                            src={screenshotPreview}
+                            alt="Payment Screenshot Preview"
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+
+                        <div className="flex-1 space-y-1 overflow-hidden">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[11px] font-bold">
+                            <CheckCircle2 className="w-3 h-3" />
+                            Screenshot Attached
+                          </span>
+                          <p className="text-xs font-bold text-slate-800 truncate">
+                            {screenshotFile?.name}
+                          </p>
+                          <p className="text-[11px] text-slate-500">
+                            Size: {(screenshotFile!.size / (1024 * 1024)).toFixed(2)} MB
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="pt-2 flex gap-2 border-t border-slate-200">
                         <label
                           htmlFor="screenshot-input-replace"
-                          className="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-semibold cursor-pointer transition-colors"
+                          className="flex-1 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg text-xs font-semibold cursor-pointer transition-colors text-center"
                         >
                           Replace Screenshot
                         </label>
@@ -1177,19 +1178,20 @@ export default function BookMedicalTokenPage() {
                         <button
                           type="button"
                           onClick={handleRemoveScreenshot}
-                          className="px-4 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg text-xs font-semibold transition-colors flex items-center gap-1"
+                          className="flex-1 py-2 bg-red-100 hover:bg-red-200 text-red-700 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1"
                         >
                           <X className="w-3.5 h-3.5" />
                           Remove
                         </button>
                       </div>
                     </div>
-                  </div>
+                  )}
                 </div>
-              )}
+
+              </div>
 
               {errorMessage && (
-                <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-medium flex items-center gap-2">
+                <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-medium flex items-center gap-2">
                   <AlertCircle className="w-4 h-4 flex-shrink-0" />
                   <span>{errorMessage}</span>
                 </div>
@@ -1210,9 +1212,9 @@ export default function BookMedicalTokenPage() {
               <button
                 type="button"
                 onClick={handleFinalSubmit}
-                disabled={!screenshotFile || submitting}
+                disabled={!passportFile || !screenshotFile || submitting}
                 className={`gold-btn w-full sm:w-auto px-8 py-3.5 rounded-lg text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-3 shadow-xl ${
-                  !screenshotFile || submitting ? "opacity-50 cursor-not-allowed" : ""
+                  !passportFile || !screenshotFile || submitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
                 {submitting ? (
