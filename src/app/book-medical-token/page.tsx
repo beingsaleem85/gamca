@@ -341,11 +341,11 @@ export default function BookMedicalTokenPage() {
 
   return (
     <div className="min-h-screen bg-[#FAF9F6] pt-28 pb-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Step Progress Indicator */}
         <div className="mb-8 bg-white rounded-2xl p-4 sm:p-6 shadow-sm border border-slate-200">
-          <div className="flex items-center justify-between max-w-2xl mx-auto">
+          <div className="flex items-center justify-between max-w-3xl mx-auto">
             
             {/* Step 1 Badge */}
             <div className={`flex items-center gap-3 ${step >= 1 ? "text-[#061224]" : "text-slate-400"}`}>
