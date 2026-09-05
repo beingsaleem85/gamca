@@ -416,7 +416,7 @@ export default function BookMedicalTokenPage() {
               </div>
             </div>
 
-            <div className={`flex-1 h-0.5 mx-4 ${step >= 2 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
+            <div className={`flex-1 h-0.5 mx-2 sm:mx-4 ${step >= 2 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
 
             {/* Step 2 Badge */}
             <div className={`flex items-center gap-3 ${step >= 2 ? "text-[#061224]" : "text-slate-400"}`}>
@@ -437,7 +437,7 @@ export default function BookMedicalTokenPage() {
               </div>
             </div>
 
-            <div className={`flex-1 h-0.5 mx-4 ${step >= 3 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
+            <div className={`flex-1 h-0.5 mx-2 sm:mx-4 ${step >= 3 ? "bg-emerald-500" : "bg-slate-200"}`}></div>
 
             {/* Step 3 Badge */}
             <div className={`flex items-center gap-3 ${step === 3 ? "text-[#061224]" : "text-slate-400"}`}>
@@ -1012,17 +1012,17 @@ export default function BookMedicalTokenPage() {
               </div>
 
               {/* Action Buttons at Bottom */}
-              <div className="flex items-center justify-center gap-4 pt-6 border-t border-slate-200">
+              <div className="flex flex-col-reverse sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-6 border-t border-slate-200">
                 <Link
                   href="/"
-                  className="px-8 py-2.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-800 rounded-lg text-xs font-bold transition-all text-center min-w-[120px]"
+                  className="w-full sm:w-auto px-8 py-2.5 bg-white hover:bg-slate-50 text-slate-800 border border-slate-800 rounded-lg text-xs font-bold transition-all text-center min-w-[120px]"
                 >
                   Cancel
                 </Link>
 
                 <button
                   type="submit"
-                  className="px-8 py-2.5 bg-[#061224] hover:bg-amber-600 text-white rounded-lg text-xs font-bold transition-all shadow-md text-center min-w-[150px]"
+                  className="w-full sm:w-auto px-8 py-2.5 bg-[#061224] hover:bg-amber-600 text-white rounded-lg text-xs font-bold transition-all shadow-md text-center min-w-[150px]"
                 >
                   Save And Continue
                 </button>
@@ -1197,11 +1197,11 @@ export default function BookMedicalTokenPage() {
             </div>
 
             {/* ACTION BUTTONS STEP 2 */}
-            <div className="flex items-center justify-between pt-4">
+            <div className="flex flex-col-reverse sm:flex-row items-center justify-between gap-4 pt-4">
               <button
                 type="button"
                 onClick={() => setStep(1)}
-                className="px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center gap-2 transition-colors"
+                className="w-full sm:w-auto px-6 py-3 bg-slate-200 hover:bg-slate-300 text-slate-800 rounded-lg text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Appointment Details
@@ -1211,7 +1211,7 @@ export default function BookMedicalTokenPage() {
                 type="button"
                 onClick={handleFinalSubmit}
                 disabled={!screenshotFile || submitting}
-                className={`gold-btn px-8 py-3.5 rounded-lg text-xs uppercase tracking-wider font-extrabold flex items-center gap-3 shadow-xl ${
+                className={`gold-btn w-full sm:w-auto px-8 py-3.5 rounded-lg text-xs uppercase tracking-wider font-extrabold flex items-center justify-center gap-3 shadow-xl ${
                   !screenshotFile || submitting ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
