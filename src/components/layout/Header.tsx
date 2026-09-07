@@ -67,17 +67,17 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-xl font-extrabold text-[#061224] tracking-tight group-hover:text-amber-600 transition-colors">
+              <span className="text-xl font-extrabold text-[#061224] tracking-tight group-hover:text-amber-600 transition-colors whitespace-nowrap">
                 {siteConfig.name}
               </span>
-              <span className="text-[10px] uppercase tracking-wider text-amber-700 font-bold">
+              <span className="text-[10px] uppercase tracking-wider text-amber-700 font-bold whitespace-nowrap">
                 {siteConfig.tagline}
               </span>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5">
             {navItems.map((item) => {
               const isActive = pathname === item.href || (item.hasSubmenu && pathname.startsWith("/medical-centers"));
 
@@ -91,7 +91,7 @@ export default function Header() {
                   >
                     <Link
                       href={item.href}
-                      className={`px-3 py-2 text-sm font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
+                      className={`px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-all flex items-center gap-1 whitespace-nowrap ${
                         isActive
                           ? "text-amber-800 bg-amber-500/10 font-bold border border-amber-500/30"
                           : "text-slate-700 hover:text-amber-700 hover:bg-slate-100/80"
@@ -157,7 +157,7 @@ export default function Header() {
                       window.dispatchEvent(new Event("reset-medical-token-form"));
                     }
                   }}
-                  className={`px-3 py-2 text-sm font-semibold rounded-lg transition-all ${
+                  className={`px-2.5 xl:px-3 py-2 text-xs xl:text-sm font-semibold rounded-lg transition-all whitespace-nowrap ${
                     isActive
                       ? "text-amber-800 bg-amber-500/10 font-bold border border-amber-500/30"
                       : "text-slate-700 hover:text-amber-700 hover:bg-slate-100/80"
