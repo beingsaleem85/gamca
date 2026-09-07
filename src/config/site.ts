@@ -3,7 +3,7 @@ export const siteConfig = {
   tagline: "Get Your Medical Token",
   description:
     "Your trusted assistance for Wafid/GAMCA medical appointment token processing in Pakistan. Fast, hassle-free, and premium concierge service.",
-  url: "https://gamcacentre.pk",
+  url: "https://gamcacentre.com",
   contact: {
     phone: "+923227840807",
     phoneDisplay: "+92 322 7840807",
