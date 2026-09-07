@@ -12,12 +12,14 @@ export default function Footer() {
           {/* Column 1: Brand Info */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative w-12 h-12 bg-white rounded-xl p-1 border border-amber-500/40 shadow-sm">
+              <div className="relative w-12 h-12 bg-white rounded-xl p-1 border border-amber-500/40 shadow-sm flex items-center justify-center">
                 <Image
-                  src={siteConfig.logo.src}
+                  src={siteConfig.logo.srcFooter}
                   alt={siteConfig.logo.alt}
-                  fill
+                  width={40}
+                  height={40}
                   className="object-contain"
+                  loading="lazy"
                 />
               </div>
               <div className="flex flex-col">

@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Privacy Policy | Gamca Centre",
+  description:
+    "Read Gamca Centre's privacy policy to understand how we collect, use and protect your personal information when you apply for a Wafid/GAMCA medical token.",
+  path: "/privacy-policy",
+});
 
 export default function PrivacyPolicyPage() {
   return (

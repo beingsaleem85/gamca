@@ -1,7 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/config/site";
-import { ShieldCheck, MessageCircle, Building2, Award, Users, CheckCircle2 } from "lucide-react";
+import { ShieldCheck, MessageCircle } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "About Us | Gamca Centre",
+  description:
+    "Learn about Gamca Centre, Pakistan's leading concierge service for Wafid/GAMCA medical appointment token booking.",
+  path: "/about-us",
+});
 
 export default function AboutUsPage() {
   return (
@@ -42,18 +50,59 @@ export default function AboutUsPage() {
             </div>
           </div>
 
-          <div className="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
-            <h3 className="text-lg font-bold text-[#061224]">Our Mission</h3>
-            <p>
-              Navigating Gulf medical regulations can be confusing and time-consuming. Gamca Centre was founded to provide a premium, transparent, and fast assistance platform. We ensure that candidates submit accurate passport and appointment data so their Wafid tokens are processed without registration errors.
-            </p>
+          <div className="space-y-6 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <div>
+              <h3 className="text-lg font-bold text-[#061224] mb-2">Who We Are & What We Do</h3>
+              <p>
+                Gamca Centre is an independent Pakistani facilitation service dedicated to assisting expatriates and overseas job candidates with their Wafid (formerly GAMCA) medical appointment token booking. Our dedicated concierge team helps candidates navigate the online token generation system, verify passport parameters, and coordinate appointments in compliance with Gulf Health Council standards.
+              </p>
+            </div>
 
-            <h3 className="text-lg font-bold text-[#061224] pt-4">Our Commitment</h3>
-            <ul className="space-y-2 text-slate-700 list-disc list-inside">
-              <li><strong>Accuracy & Verification:</strong> Live validation of passport numbers, date matching, and candidate credentials.</li>
-              <li><strong>Speed:</strong> Dedicated priority assistance to deliver updates directly to candidates via WhatsApp.</li>
-              <li><strong>Transparency:</strong> Clear guidance regarding official Wafid medical center assignment rules in Pakistan.</li>
-            </ul>
+            {/* Independent Disclaimer Callout */}
+            <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl">
+              <h4 className="font-bold text-amber-950 text-xs sm:text-sm mb-1">
+                Important Independent Service Positioning
+              </h4>
+              <p className="text-xs text-amber-900 leading-relaxed">
+                Gamca Centre is a private, third-party concierge assistance service. <strong>We are NOT the government Wafid portal and are not affiliated with the Gulf Health Council (GHC).</strong> Official medical tokens are issued through the central Wafid digital infrastructure (<a href="https://wafid.com" target="_blank" rel="noopener noreferrer" className="underline font-bold hover:text-amber-700">wafid.com</a>), and examination centers in Pakistan are automatically assigned by the official system according to your selected city.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-bold text-[#061224] mb-2">Our Operating Standards</h3>
+              <ul className="space-y-2 text-slate-700 list-disc list-inside">
+                <li><strong>Pre-Submission Verification:</strong> Rigorous validation of candidate names, passport numbers, issue/expiry dates, and destination country rules to prevent clinic registration rejections.</li>
+                <li><strong>Concierge Communication:</strong> Instant status updates, receipts, and instructions delivered directly via WhatsApp.</li>
+                <li><strong>Fair & Transparent Pricing:</strong> Fixed facilitation fee of Rs 4,500 with zero hidden consultation charges.</li>
+              </ul>
+            </div>
+
+            {/* Verified Business Contact Details */}
+            <div className="p-6 bg-slate-50 rounded-2xl border border-slate-200 space-y-3">
+              <h3 className="text-base font-bold text-[#061224]">Official Contact & Operational Details</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-700">
+                <div>
+                  <span className="font-bold text-slate-900 block">Customer Support / WhatsApp:</span>
+                  <a href={siteConfig.contact.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-amber-700 font-semibold hover:underline">
+                    {siteConfig.contact.phoneDisplay}
+                  </a>
+                </div>
+                <div>
+                  <span className="font-bold text-slate-900 block">Email Support:</span>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="text-amber-700 font-semibold hover:underline">
+                    {siteConfig.contact.email}
+                  </a>
+                </div>
+                <div>
+                  <span className="font-bold text-slate-900 block">Support Operating Hours:</span>
+                  <span>{siteConfig.contact.workingHours}</span>
+                </div>
+                <div>
+                  <span className="font-bold text-slate-900 block">Registered Office / Operational Base:</span>
+                  <span>{siteConfig.contact.address}</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Action CTAs */}
@@ -63,7 +112,7 @@ export default function AboutUsPage() {
               className="gold-btn px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center gap-2 shadow-lg"
             >
               <ShieldCheck className="w-4 h-4" />
-              Get Medical Token
+              Book Wafid Token Online
             </Link>
             <a
               href={siteConfig.contact.whatsappUrl}

@@ -1,8 +1,34 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { ShieldCheck, MessageCircle, FileText, CheckCircle2, Building2, UserCheck, AlertTriangle } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Wafid Medical Examination Process Step by Step | Gamca Centre",
+  description:
+    "Learn the complete Wafid/GAMCA medical examination process for Pakistani candidates — from token booking to lab tests and fitness status, explained step by step.",
+  path: "/medical-process",
+});
 
 export default function MedicalProcessPage() {
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://www.gamcacentre.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Medical Process",
+        item: "https://www.gamcacentre.com/medical-process",
+      },
+    ],
+  };
   const steps = [
     {
       num: "01",
@@ -37,11 +63,16 @@ export default function MedicalProcessPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6] pt-28 pb-20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <div className="min-h-screen bg-[#FAF9F6] pt-28 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Title */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-10">
           <span className="px-3.5 py-1 bg-amber-500/10 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3 inline-block">
             Step-by-Step Guide
           </span>
@@ -51,6 +82,31 @@ export default function MedicalProcessPage() {
           <p className="mt-3 text-slate-600 text-sm max-w-xl mx-auto leading-relaxed">
             Understand how Wafid GAMCA medical appointment token processing works for Pakistani candidates traveling to the Gulf.
           </p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
+            <span>Reviewed by the Gamca Centre team</span>
+            <span>•</span>
+            <span>Last updated September 2026</span>
+          </div>
+        </div>
+
+        {/* Table of Contents / Quick Jump Links */}
+        <div className="mb-10 p-5 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div className="flex items-center gap-2 mb-3 text-xs font-bold uppercase tracking-wider text-slate-500">
+            <FileText className="w-4 h-4 text-amber-600" />
+            <span>Process Navigation — Quick Jump to Step</span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            {steps.map((s) => (
+              <a
+                key={s.num}
+                href={`#step-${s.num}`}
+                className="text-xs px-3 py-2 bg-slate-50 hover:bg-amber-500/10 hover:text-amber-800 text-slate-700 rounded-lg font-medium transition-colors border border-slate-100 flex items-center gap-2"
+              >
+                <span className="font-mono font-bold text-amber-600">{s.num}</span>
+                <span className="truncate">{s.title}</span>
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Process Timeline */}
@@ -58,14 +114,43 @@ export default function MedicalProcessPage() {
           {steps.map((s) => (
             <div
               key={s.num}
-              className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start gap-6"
+              id={`step-${s.num}`}
+              className="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start gap-6 scroll-mt-28"
             >
               <div className="w-14 h-14 bg-[#061224] text-amber-400 rounded-2xl flex items-center justify-center font-mono font-black text-xl flex-shrink-0 shadow-md border border-amber-500/30">
                 {s.num}
               </div>
-              <div className="space-y-2">
-                <h3 className="text-lg font-bold text-[#061224]">{s.title}</h3>
+              <div className="space-y-2 flex-1">
+                <h2 className="text-lg font-bold text-[#061224] m-0 p-0">
+                  Step {s.num}: {s.title}
+                </h2>
                 <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{s.desc}</p>
+                {s.num === "04" && (
+                  <p className="text-xs text-amber-800 pt-1 font-medium">
+                    Ensure you review the complete{" "}
+                    <Link
+                      href="/required-documents"
+                      className="underline font-bold hover:text-amber-600"
+                    >
+                      checklist of required documents for your Wafid medical test
+                    </Link>{" "}
+                    before visiting the diagnostic center.
+                  </p>
+                )}
+                {s.num === "06" && (
+                  <p className="text-xs text-slate-500 pt-1">
+                    Candidates can verify their medical status online on the official Wafid platform at{" "}
+                    <a
+                      href="https://wafid.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-amber-700 underline font-semibold hover:text-amber-900"
+                    >
+                      wafid.com (Official Portal)
+                    </a>
+                    .
+                  </p>
+                )}
               </div>
             </div>
           ))}
@@ -95,7 +180,7 @@ export default function MedicalProcessPage() {
               className="gold-btn px-8 py-3.5 rounded-xl text-xs uppercase tracking-wider font-extrabold flex items-center gap-2 shadow-lg"
             >
               <ShieldCheck className="w-4 h-4" />
-              Get Medical Token
+              Book Wafid Token Online
             </Link>
             <a
               href={siteConfig.contact.whatsappUrl}
@@ -111,5 +196,6 @@ export default function MedicalProcessPage() {
 
       </div>
     </div>
+    </>
   );
 }

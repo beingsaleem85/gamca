@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Terms & Conditions | Gamca Centre",
+  description:
+    "Read the terms and conditions for using Gamca Centre's Wafid/GAMCA medical token booking assistance service in Pakistan.",
+  path: "/terms-and-conditions",
+});
 
 export default function TermsAndConditionsPage() {
   return (
@@ -30,17 +38,17 @@ export default function TermsAndConditionsPage() {
 
           <h2 className="text-base font-bold text-[#061224] pt-4">4. Payment & Verification</h2>
           <p>
-            Submission requests require payment verification. Applicants must upload a valid transaction screenshot upon completing Step 2. Requests without valid proof of payment will not be processed.
+            Submission requests require payment verification. The standard concierge facilitation fee is Rs 4,500 per candidate token request. Applicants must upload a valid transaction screenshot upon completing Step 2. Requests without valid proof of payment will not be processed.
           </p>
 
-          <h2 className="text-base font-bold text-[#061224] pt-4">5. Disclaimer</h2>
+          <h2 className="text-base font-bold text-[#061224] pt-4">5. Disclaimer & Independent Status</h2>
           <p>
-            Gamca Centre is an independent assistance provider. Medical center directory records are referenced from Wafid official sources. We do not own or operate third-party medical diagnostic centers.
+            Gamca Centre is an independent assistance provider. Medical center directory records are referenced from Wafid official sources (<a href="https://wafid.com" target="_blank" rel="noopener noreferrer" className="underline font-bold hover:text-amber-700">wafid.com</a>). We do not own or operate third-party medical diagnostic centers.
           </p>
 
           <h2 className="text-base font-bold text-[#061224] pt-4">6. Contact</h2>
           <p>
-            For questions regarding these terms, please email <a href={`mailto:${siteConfig.contact.email}`} className="text-amber-700 font-bold underline">{siteConfig.contact.email}</a>.
+            For questions regarding these terms or payment inquiries, please email <a href={`mailto:${siteConfig.contact.email}`} className="text-amber-700 font-bold underline">{siteConfig.contact.email}</a> or WhatsApp us at {siteConfig.contact.phoneDisplay}.
           </p>
         </div>
       </div>

@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { Globe, ShieldCheck, MessageCircle, ArrowRight, CheckCircle2 } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "GCC Countries Wafid Medical Token Support | Gamca Centre",
+  description:
+    "Wafid/GAMCA medical appointment token assistance for Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman and Yemen — all handled online for candidates across Pakistan.",
+  path: "/medical-countries",
+});
 
 export default function MedicalCountriesPage() {
   const countryDetails = [

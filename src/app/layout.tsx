@@ -1,48 +1,24 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import FloatingWhatsApp from "@/components/common/FloatingWhatsApp";
 import { siteConfig } from "@/config/site";
+import { constructMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: `${siteConfig.name} | ${siteConfig.tagline}`,
-  description: siteConfig.description,
-  keywords: [
-    "Gamca Centre",
-    "Get Your Medical Token",
-    "Wafid Pakistan",
-    "GAMCA Pakistan",
-    "Wafid medical center Lahore",
-    "Wafid medical center Karachi",
-    "Wafid medical center Islamabad",
-    "GCC medical token assistance",
-    "Saudi Arabia medical appointment",
-    "UAE Wafid token",
-  ],
-  authors: [{ name: siteConfig.name }],
-  metadataBase: new URL(siteConfig.url),
-  openGraph: {
-    title: `${siteConfig.name} | ${siteConfig.tagline}`,
-    description: siteConfig.description,
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    images: [
-      {
-        url: "/logo.png",
-        width: 800,
-        height: 800,
-        alt: siteConfig.name,
-      },
-    ],
-    locale: "en_PK",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
+
+export const metadata: Metadata = constructMetadata({
+  title: "Wafid GAMCA Medical Token Booking in Pakistan | Gamca Centre",
+  description:
+    "Book your Wafid/GAMCA medical appointment token online from anywhere in Pakistan. Fast concierge assistance for Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman & Yemen visas.",
+  path: "/",
+});
 
 export default function RootLayout({
   children,
@@ -53,21 +29,23 @@ export default function RootLayout({
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: siteConfig.name,
-    url: siteConfig.url,
-    logo: `${siteConfig.url}/logo.png`,
+    name: "Gamca Centre",
+    url: "https://www.gamcacentre.com",
+    logo: "https://www.gamcacentre.com/logo.png",
+    areaServed: "PK",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: siteConfig.contact.phone,
+      telephone: "+92-322-7840807",
       contactType: "customer service",
       areaServed: "PK",
-      availableLanguage: ["en", "ur"],
+      availableLanguage: ["English", "Urdu"],
     },
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className={`${inter.variable} scroll-smooth font-sans`}>
       <head>
+        <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

@@ -2,6 +2,14 @@ import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import WhatsAppIcon from "@/components/common/WhatsAppIcon";
 import { Phone, Mail, MapPin, Clock, MessageCircle, ShieldCheck, Send } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Contact Gamca Centre – Wafid Medical Token Support Pakistan",
+  description:
+    "Get in touch with Gamca Centre's concierge team for Wafid/GAMCA medical token booking help anywhere in Pakistan. WhatsApp, phone & email support, Monday–Saturday.",
+  path: "/contact-us",
+});
 
 export default function ContactUsPage() {
   return (

@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/config/site";
-import { getAvailableCities } from "@/lib/medical-centers";
+import { getAvailableCities, slugifyCity } from "@/lib/medical-centers";
 import WhatsAppIcon from "@/components/common/WhatsAppIcon";
 import { MessageCircle, Menu, X, ShieldCheck, ChevronRight, ChevronDown, MapPin } from "lucide-react";
 
@@ -56,11 +56,12 @@ export default function Header() {
           
           {/* Logo & Brand */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative w-11 h-11 flex-shrink-0 bg-slate-50 rounded-lg p-1 border border-amber-500/40 group-hover:border-amber-600 transition-colors shadow-sm">
+            <div className="relative w-11 h-11 flex-shrink-0 bg-slate-50 rounded-lg p-1 border border-amber-500/40 group-hover:border-amber-600 transition-colors shadow-sm flex items-center justify-center">
               <Image
-                src={siteConfig.logo.src}
+                src={siteConfig.logo.srcSm}
                 alt={siteConfig.logo.alt}
-                fill
+                width={36}
+                height={36}
                 className="object-contain p-0.5"
                 priority
               />
@@ -130,7 +131,7 @@ export default function Header() {
                         {cityList.map((city) => (
                           <Link
                             key={city}
-                            href={`/medical-centers?city=${encodeURIComponent(city)}`}
+                            href={`/medical-centers/${slugifyCity(city)}`}
                             onClick={() => setMedicalCentersDropdownOpen(false)}
                             className="flex items-center justify-between px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-100 hover:text-amber-700 rounded-lg transition-colors group/item"
                           >
@@ -268,7 +269,7 @@ export default function Header() {
                         {cityList.map((city) => (
                           <Link
                             key={city}
-                            href={`/medical-centers?city=${encodeURIComponent(city)}`}
+                            href={`/medical-centers/${slugifyCity(city)}`}
                             onClick={() => setMobileMenuOpen(false)}
                             className="block px-3 py-1.5 text-xs font-medium text-slate-700 hover:text-amber-700"
                           >

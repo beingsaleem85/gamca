@@ -1,6 +1,14 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
 import { FileCheck, ShieldCheck, MessageCircle, CheckCircle2, FileText, AlertCircle } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Required Documents for Wafid Medical Test in Pakistan | Gamca Centre",
+  description:
+    "Checklist of documents needed for your Wafid/GAMCA medical examination in Pakistan: passport, CNIC, photographs, visa proof and appointment slip. Get the full list here.",
+  path: "/required-documents",
+});
 
 export default function RequiredDocumentsPage() {
   const documents = [
@@ -51,6 +59,11 @@ export default function RequiredDocumentsPage() {
           <p className="mt-3 text-slate-600 text-sm max-w-xl mx-auto leading-relaxed">
             Ensure you bring all required original documents and copies when visiting your assigned Wafid medical center in Pakistan.
           </p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-500">
+            <span>Reviewed by the Gamca Centre team</span>
+            <span>•</span>
+            <span>Last updated September 2026</span>
+          </div>
         </div>
 
         {/* Documents Grid */}
@@ -68,7 +81,7 @@ export default function RequiredDocumentsPage() {
                   {doc.badge}
                 </span>
               </div>
-              <h3 className="text-base font-bold text-[#061224]">{doc.title}</h3>
+              <h2 className="text-base font-bold text-[#061224] m-0 p-0">{doc.title}</h2>
               <p className="text-xs text-slate-600 leading-relaxed">{doc.desc}</p>
             </div>
           ))}

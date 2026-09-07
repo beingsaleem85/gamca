@@ -13,7 +13,16 @@ import {
   HelpCircle,
   CheckCircle2,
   MapPin,
+  Info,
 } from "lucide-react";
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
+  title: "Wafid GAMCA Medical Token Booking in Pakistan | Gamca Centre",
+  description:
+    "Book your Wafid/GAMCA medical appointment token online from anywhere in Pakistan. Fast concierge assistance for Saudi Arabia, UAE, Qatar, Kuwait, Bahrain, Oman & Yemen visas.",
+  path: "/",
+});
 
 export default function HomePage() {
   const topCenters = getAllMedicalCenters().slice(0, 6);
@@ -102,9 +111,19 @@ export default function HomePage() {
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
               
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold text-amber-800 uppercase tracking-widest max-w-full">
-                <ShieldCheck className="w-4 h-4 text-amber-600 flex-shrink-0" />
-                <span className="truncate">Pakistan Concierge Medical Token Portal</span>
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-2 max-w-full">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-full text-xs font-bold text-amber-800 uppercase tracking-widest max-w-full">
+                  <ShieldCheck className="w-4 h-4 text-amber-600 flex-shrink-0" />
+                  <span className="truncate">Pakistan Concierge Medical Token Portal</span>
+                </div>
+              </div>
+
+              {/* Prominent Above-the-Fold Independent Service Disclaimer */}
+              <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-3 text-left">
+                <Info className="w-4 h-4 text-amber-700 flex-shrink-0 mt-0.5" />
+                <p className="text-xs text-amber-950 leading-relaxed font-medium">
+                  <strong>Independent Assistance Notice:</strong> Gamca Centre is an independent concierge service assisting with token appointment booking and is not affiliated with the official Wafid/GAMCA government portal.
+                </p>
               </div>
 
               <h1 className="text-2xl sm:text-3xl lg:text-[38px] xl:text-4xl font-extrabold tracking-tight text-[#061224] leading-snug">
@@ -155,7 +174,7 @@ export default function HomePage() {
                   <CheckCircle2 className="w-4 h-4 text-amber-600" /> Fast Assistance
                 </span>
                 <span className="flex items-center gap-1.5 whitespace-nowrap">
-                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> All Pakistan Cities
+                  <CheckCircle2 className="w-4 h-4 text-amber-600" /> 11 Pakistan Cities
                 </span>
                 <span className="flex items-center gap-1.5 whitespace-nowrap">
                   <CheckCircle2 className="w-4 h-4 text-amber-600" /> Official Format Support
@@ -192,7 +211,7 @@ export default function HomePage() {
                   </div>
                   <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                     <span className="text-slate-500 font-medium">Coverage:</span>
-                    <span className="text-amber-800 font-bold">All 14+ Pakistan Cities</span>
+                    <span className="text-amber-800 font-bold">11 Pakistan Cities</span>
                   </div>
                   <div className="flex items-center justify-between border-b border-slate-200 pb-2">
                     <span className="text-slate-500 font-medium">Destinations:</span>
@@ -231,7 +250,7 @@ export default function HomePage() {
             </div>
 
             <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
-              <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">14+</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">11</span>
               <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">Pakistan Cities</span>
             </div>
 
@@ -241,8 +260,8 @@ export default function HomePage() {
             </div>
 
             <div className="p-3 sm:p-4 rounded-2xl bg-amber-500/5 border border-amber-500/20 shadow-sm">
-              <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">24/7</span>
-              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">WhatsApp Support</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-[#061224] font-mono block">Mon–Sat</span>
+              <span className="text-[10px] sm:text-xs text-amber-900 font-bold uppercase tracking-wider block">9AM–8PM Support</span>
             </div>
 
           </div>
