@@ -17,7 +17,6 @@ import {
   X,
   Loader2,
   ChevronDown,
-  Info,
 } from "lucide-react";
 
 export default function BookMedicalTokenClient() {
@@ -459,19 +458,6 @@ export default function BookMedicalTokenClient() {
         {step === 1 && (
           <div className="bg-white rounded-2xl p-6 sm:p-10 shadow-sm border border-slate-200/90 space-y-8">
             
-            {/* Prominent Independent Disclaimer Above the Fold */}
-            <div className="p-4 bg-amber-500/10 border border-amber-500/30 rounded-2xl flex items-start gap-3">
-              <Info className="w-5 h-5 text-amber-700 flex-shrink-0 mt-0.5" />
-              <div className="space-y-1 text-xs text-amber-950">
-                <p className="font-bold text-slate-900">
-                  Independent Concierge Service Notice
-                </p>
-                <p className="leading-relaxed">
-                  Gamca Centre is an independent assistance service helping candidates in Pakistan book their Wafid/GAMCA medical appointment tokens. We are <strong>not affiliated with, endorsed by, or part of the official Wafid or Gulf Health Council government portal</strong>. Your assigned medical center will be automatically designated by the central Wafid system based on your selected city.
-                </p>
-              </div>
-            </div>
-
             {/* Header Title */}
             <div>
               <h1 className="text-xl font-bold text-[#061224]">
