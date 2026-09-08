@@ -237,7 +237,7 @@ export async function POST(req: NextRequest) {
         </div>
 
         <div class="footer">
-          Gamca Centre Concierge Portal &bull; gamcacentre9@gmail.com &bull; +92 322 7840807
+          Gamca Centre Concierge Portal &bull; gamcacentre9@gmail.com &bull; +92 307 925 44 22
         </div>
       </div>
     </body>

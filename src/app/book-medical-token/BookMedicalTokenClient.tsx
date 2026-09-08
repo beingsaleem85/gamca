@@ -991,51 +991,38 @@ export default function BookMedicalTokenClient() {
                 
                 {/* QR Code Container */}
                 <div className="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-900/90 rounded-2xl border border-amber-500/30 text-center">
-                  <div className="relative w-48 h-48 bg-white p-3 rounded-xl shadow-lg border-2 border-amber-400/50 mb-3 flex items-center justify-center">
+                  <div className="relative w-52 h-52 bg-white p-2 rounded-xl shadow-lg border-2 border-amber-400/50 mb-3 flex items-center justify-center overflow-hidden">
                     <Image
                       src={siteConfig.paymentInfo.qrImageSrc}
-                      alt="Payment QR Code"
+                      alt="JazzCash Raast GAMCA Medical Centre Payment QR Code"
                       fill
-                      className="object-contain p-2"
-                      onError={(e) => {
-                        const target = e.target as HTMLElement;
-                        target.style.display = "none";
-                      }}
+                      className="object-contain p-1"
+                      priority
                     />
-                    <div className="flex flex-col items-center justify-center text-slate-800 space-y-1">
-                      <QrCode className="w-16 h-16 text-[#061224]" />
-                      <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700">QR Code Asset</span>
-                      <span className="text-[9px] text-slate-500">/public/payment-qr.png</span>
-                    </div>
                   </div>
                   <p className="text-xs font-semibold text-amber-300">Scan QR Code via Banking App</p>
-                  <p className="text-[11px] text-slate-400 mt-0.5">EasyPaisa / JazzCash / Banking Apps</p>
+                  <p className="text-[11px] text-slate-400 mt-0.5">JazzCash / Raast / Any Banking App</p>
                 </div>
 
                 {/* Account Details Specs */}
-                <div className="md:col-span-7 space-y-4">
-                  <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
+                <div className="md:col-span-7 space-y-3.5">
+                  <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
                     <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Account Title / Name</span>
                     <span className="text-base font-bold text-amber-400">{siteConfig.paymentInfo.accountName}</span>
                   </div>
 
-                  <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Bank Name / Provider</span>
+                  <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Payment Method / Provider</span>
                     <span className="text-sm font-semibold text-white">{siteConfig.paymentInfo.bankName}</span>
                   </div>
 
-                  <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Account Number / Phone</span>
-                    <span className="text-base font-bold text-white font-mono">{siteConfig.paymentInfo.accountNumber}</span>
+                  <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">TILL ID / Account Number</span>
+                    <span className="text-xl font-bold text-white font-mono tracking-widest">{siteConfig.paymentInfo.accountNumber}</span>
                   </div>
 
-                  <div className="bg-slate-900/60 p-4 rounded-xl border border-slate-800">
-                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">IBAN Number</span>
-                    <span className="text-xs font-bold text-amber-300 font-mono tracking-wider">{siteConfig.paymentInfo.iban}</span>
-                  </div>
-
-                  <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-200">
-                    💡 <strong>Note:</strong> {siteConfig.paymentInfo.paymentReferenceNote}
+                  <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-200 leading-relaxed">
+                    💡 <strong>Payment Instructions:</strong> {siteConfig.paymentInfo.paymentReferenceNote}
                   </div>
                 </div>
 

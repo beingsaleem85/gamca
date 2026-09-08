@@ -35,7 +35,7 @@ export default function RootLayout({
     areaServed: "PK",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+92-322-7840807",
+      telephone: siteConfig.contact.phoneDisplay,
       contactType: "customer service",
       areaServed: "PK",
       availableLanguage: ["English", "Urdu"],
