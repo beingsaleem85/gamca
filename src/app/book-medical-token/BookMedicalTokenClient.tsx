@@ -990,17 +990,18 @@ export default function BookMedicalTokenClient() {
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 
                 {/* QR Code Container */}
-                <div className="md:col-span-5 flex flex-col items-center justify-center p-6 bg-slate-900/90 rounded-2xl border border-amber-500/30 text-center">
-                  <div className="relative w-52 h-52 bg-white p-2 rounded-xl shadow-lg border-2 border-amber-400/50 mb-3 flex items-center justify-center overflow-hidden">
+                <div className="md:col-span-5 flex flex-col items-center justify-center p-5 bg-slate-900/90 rounded-2xl border border-amber-500/30 text-center">
+                  <div className="w-full flex justify-center mb-3">
                     <Image
                       src={siteConfig.paymentInfo.qrImageSrc}
                       alt="JazzCash Raast GAMCA Medical Centre Payment QR Code"
-                      fill
-                      className="object-contain p-1"
+                      width={600}
+                      height={848}
+                      className="w-full max-w-[280px] sm:max-w-[320px] h-auto rounded-2xl shadow-2xl border-2 border-amber-400/70"
                       priority
                     />
                   </div>
-                  <p className="text-xs font-semibold text-amber-300">Scan QR Code via Banking App</p>
+                  <p className="text-xs font-bold text-amber-300">Scan QR Code via Banking App</p>
                   <p className="text-[11px] text-slate-400 mt-0.5">JazzCash / Raast / Any Banking App</p>
                 </div>
 
