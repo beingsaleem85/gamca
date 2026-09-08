@@ -996,6 +996,11 @@ export default function BookMedicalTokenClient() {
                     <span className="text-xl font-bold text-white font-mono tracking-widest">{siteConfig.paymentInfo.accountNumber}</span>
                   </div>
 
+                  <div className="bg-slate-900/60 p-3.5 rounded-xl border border-slate-800">
+                    <span className="text-[11px] uppercase tracking-wider text-slate-400 block mb-1">Token Fee</span>
+                    <span className="text-xl font-bold text-amber-400 font-mono tracking-wider">{siteConfig.paymentInfo.tokenFee || "PKR 4,500/-"}</span>
+                  </div>
+
                   <div className="p-3.5 bg-amber-500/10 border border-amber-500/30 rounded-xl text-xs text-amber-200 leading-relaxed">
                     💡 <strong>Payment Instructions:</strong> {siteConfig.paymentInfo.paymentReferenceNote}
                   </div>

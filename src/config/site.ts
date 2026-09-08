@@ -27,6 +27,7 @@ export const siteConfig = {
     bankName: "JazzCash / Raast",
     tillId: "984433580",
     accountNumber: "984433580",
+    tokenFee: "PKR 4,500/-",
     paymentReferenceNote: "Dial *786*10# and enter TILL ID (984433580) to pay via JazzCash, or scan QR code via any Banking / Raast App.",
     feeNote: "Medical appointment token fee applies as per Wafid standards.",
   },
