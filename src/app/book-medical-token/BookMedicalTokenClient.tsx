@@ -565,18 +565,6 @@ export default function BookMedicalTokenClient() {
                     Candidate Information
                   </legend>
 
-                  {/* Data Privacy & Handling Reassurance */}
-                  <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl flex items-center gap-2.5 text-xs text-slate-600">
-                    <ShieldCheck className="w-4 h-4 text-emerald-600 flex-shrink-0" />
-                    <span>
-                      <strong>Privacy &amp; Security:</strong> Your information is transmitted securely using SSL/TLS encryption. Candidate passport and CNIC credentials are submitted strictly to the official Wafid portal to generate your appointment slip. Review our{" "}
-                      <Link href="/privacy-policy" target="_blank" className="text-amber-700 underline font-semibold hover:text-amber-900">
-                        Privacy Policy
-                      </Link>
-                      .
-                    </span>
-                  </div>
-
                   <div className="space-y-5">
                     
                     {/* Row 1 */}
