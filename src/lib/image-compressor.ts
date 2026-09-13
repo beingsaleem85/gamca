@@ -78,18 +78,18 @@ export async function compressImageFile(
     img.onload = async () => {
       URL.revokeObjectURL(objectUrl);
 
-      // Adaptive Stepping Schedule:
-      // Pass 1: 2400px @ 94% quality
-      // Pass 2: 2200px @ 90% quality
-      // Pass 3: 2000px @ 86% quality
-      // Pass 4: 1800px @ 82% quality
-      // Pass 5: 1600px @ 78% quality
+      // Adaptive Stepping Schedule (Quality-first floor):
+      // Pass 1: 2400px @ 94% quality (ideal for small print & MRZ lines)
+      // Pass 2: 2200px @ 92% quality
+      // Pass 3: 2000px @ 90% quality
+      // Pass 4: 1800px @ 88% quality
+      // Pass 5: 1600px @ 86% quality (floor quality to prevent JPEG ringing artifacts)
       const passes = [
         { maxDim: options.initialMaxDimension || 2400, quality: options.initialQuality || 0.94 },
-        { maxDim: 2200, quality: 0.90 },
-        { maxDim: 2000, quality: 0.86 },
-        { maxDim: 1800, quality: 0.82 },
-        { maxDim: 1600, quality: 0.78 },
+        { maxDim: 2200, quality: 0.92 },
+        { maxDim: 2000, quality: 0.90 },
+        { maxDim: 1800, quality: 0.88 },
+        { maxDim: 1600, quality: 0.86 },
       ];
 
       let bestBlob: Blob | null = null;
