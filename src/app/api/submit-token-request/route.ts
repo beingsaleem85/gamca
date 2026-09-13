@@ -74,10 +74,17 @@ export async function POST(req: NextRequest) {
     }
 
     const allowedPassportTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg", "application/pdf"];
-    if (!allowedPassportTypes.includes(passportFile.type) || passportFile.size > 5 * 1024 * 1024) {
+    if (!allowedPassportTypes.includes(passportFile.type)) {
       return NextResponse.json(
-        { success: false, message: "Passport copy must be a JPEG, PNG, WEBP, or PDF under 5MB." },
+        { success: false, message: "Passport copy must be a JPEG, PNG, WEBP image or PDF document." },
         { status: 400 }
+      );
+    }
+
+    if (passportFile.size > 4 * 1024 * 1024) {
+      return NextResponse.json(
+        { success: false, message: `Passport copy is too large (${(passportFile.size / (1024 * 1024)).toFixed(2)} MB) — please attach a file under 4 MB.` },
+        { status: 413 }
       );
     }
 
@@ -94,12 +101,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validate screenshot size & extension (<= 5MB)
+    // Validate screenshot size & extension (<= 4MB)
     const allowedMimeTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
-    if (!allowedMimeTypes.includes(screenshotFile.type) || screenshotFile.size > 5 * 1024 * 1024) {
+    if (!allowedMimeTypes.includes(screenshotFile.type)) {
       return NextResponse.json(
-        { success: false, message: "Screenshot must be a JPEG, PNG, or WEBP image under 5MB." },
+        { success: false, message: "Screenshot must be a JPEG, PNG, or WEBP image." },
         { status: 400 }
+      );
+    }
+
+    if (screenshotFile.size > 4 * 1024 * 1024) {
+      return NextResponse.json(
+        { success: false, message: `Payment screenshot is too large (${(screenshotFile.size / (1024 * 1024)).toFixed(2)} MB) — please attach an image under 4 MB.` },
+        { status: 413 }
+      );
+    }
+
+    if (passportFile.size + screenshotFile.size > 4 * 1024 * 1024) {
+      return NextResponse.json(
+        { success: false, message: `Combined size of attached files exceeds the 4 MB limit — please upload compressed images.` },
+        { status: 413 }
       );
     }
 

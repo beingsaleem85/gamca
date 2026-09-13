@@ -17,7 +17,9 @@ import {
   X,
   Loader2,
   ChevronDown,
+  Info,
 } from "lucide-react";
+import { compressImageFile } from "@/lib/image-compressor";
 
 export default function BookMedicalTokenClient() {
   const [step, setStep] = useState<1 | 2 | 3>(1);
@@ -284,21 +286,31 @@ export default function BookMedicalTokenClient() {
   };
 
   // Step 1 Passport Copy Upload Handler
-  const handlePassportFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePassportFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.size > 5 * 1024 * 1024) {
-        alert("Passport file size exceeds 5MB limit. Please upload a smaller file.");
-        return;
-      }
+      const rawFile = e.target.files[0];
       const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg", "application/pdf"];
-      if (!allowedTypes.includes(file.type)) {
+      if (!allowedTypes.includes(rawFile.type)) {
         alert("Only PNG, JPG, JPEG, WEBP images, and PDF documents are allowed for Passport copy.");
         return;
       }
-      setPassportFile(file);
-      if (file.type.startsWith("image/")) {
-        setPassportPreview(URL.createObjectURL(file));
+
+      // Check max size for raw PDF (non-compressible)
+      if (rawFile.type === "application/pdf" && rawFile.size > 4 * 1024 * 1024) {
+        alert(`Passport PDF file size (${(rawFile.size / (1024 * 1024)).toFixed(2)} MB) exceeds the 4 MB limit. Please attach a file under 4 MB.`);
+        return;
+      }
+
+      // Compress image files automatically
+      const compressedFile = await compressImageFile(rawFile);
+      if (compressedFile.size > 4 * 1024 * 1024) {
+        alert(`Passport copy file size (${(compressedFile.size / (1024 * 1024)).toFixed(2)} MB) exceeds the 4 MB limit. Please attach a smaller image or document.`);
+        return;
+      }
+
+      setPassportFile(compressedFile);
+      if (compressedFile.type.startsWith("image/")) {
+        setPassportPreview(URL.createObjectURL(compressedFile));
       } else {
         setPassportPreview(null);
       }
@@ -316,19 +328,23 @@ export default function BookMedicalTokenClient() {
   };
 
   // Step 2 Screenshot Upload Handler
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      if (file.size > 5 * 1024 * 1024) {
-        alert("File size exceeds 5MB limit. Please upload a smaller image.");
+      const rawFile = e.target.files[0];
+      if (!["image/jpeg", "image/png", "image/webp", "image/jpg"].includes(rawFile.type)) {
+        alert("Only PNG, JPG, JPEG, and WEBP image files are allowed for payment screenshot.");
         return;
       }
-      if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
-        alert("Only PNG, JPG, JPEG, and WEBP image files are allowed.");
+
+      // Compress payment screenshot automatically
+      const compressedFile = await compressImageFile(rawFile);
+      if (compressedFile.size > 4 * 1024 * 1024) {
+        alert(`Payment screenshot size (${(compressedFile.size / (1024 * 1024)).toFixed(2)} MB) exceeds the 4 MB limit. Please attach a smaller image.`);
         return;
       }
-      setScreenshotFile(file);
-      setScreenshotPreview(URL.createObjectURL(file));
+
+      setScreenshotFile(compressedFile);
+      setScreenshotPreview(URL.createObjectURL(compressedFile));
     }
   };
 
@@ -354,12 +370,28 @@ export default function BookMedicalTokenClient() {
     setErrorMessage("");
 
     try {
+      // Ensure both files are compressed before sending
+      const finalPassport = await compressImageFile(passportFile);
+      const finalScreenshot = await compressImageFile(screenshotFile);
+
+      // Validate total combined payload size
+      const totalBytes = finalPassport.size + finalScreenshot.size;
+      const MAX_PAYLOAD_BYTES = 4 * 1024 * 1024; // 4 MB limit
+
+      if (totalBytes > MAX_PAYLOAD_BYTES) {
+        setErrorMessage(
+          `Total file size (${(totalBytes / (1024 * 1024)).toFixed(2)} MB) exceeds the 4 MB server upload limit. Please select smaller images or compressed files.`
+        );
+        setSubmitting(false);
+        return;
+      }
+
       const bodyData = new FormData();
       Object.entries(formData).forEach(([key, val]) => {
         bodyData.append(key, String(val));
       });
-      bodyData.append("passportCopy", passportFile);
-      bodyData.append("screenshot", screenshotFile);
+      bodyData.append("passportCopy", finalPassport);
+      bodyData.append("screenshot", finalScreenshot);
 
       // Submit to Next.js API route
       const res = await fetch("/api/submit-token-request", {
@@ -367,18 +399,44 @@ export default function BookMedicalTokenClient() {
         body: bodyData,
       });
 
-      const data = await res.json();
+      let data: { success?: boolean; applicationId?: string; message?: string } = {};
+      try {
+        data = await res.json();
+      } catch {
+        if (res.status === 413) {
+          setErrorMessage(
+            "This file is too large — attached files exceed the 4 MB limit. Please upload smaller images."
+          );
+          return;
+        }
+        setErrorMessage(`Server error (${res.status}). Please try again or contact us via WhatsApp.`);
+        return;
+      }
 
-      if (data.success) {
-        setApplicationId(data.applicationId);
+      if (res.ok && data.success) {
+        setApplicationId(data.applicationId || "");
         setStep(3);
         window.scrollTo({ top: 0, behavior: "smooth" });
       } else {
-        setErrorMessage(data.message || "Failed to submit request. Please try again.");
+        if (res.status === 413) {
+          setErrorMessage(
+            data.message || "This file is too large — attached files exceed the 4 MB limit. Please upload smaller images."
+          );
+        } else {
+          setErrorMessage(data.message || "Failed to submit request. Please try again.");
+        }
       }
-    } catch (err) {
-      console.error(err);
-      setErrorMessage("A network error occurred. Please try again or contact us via WhatsApp.");
+    } catch (err: unknown) {
+      console.error("Submission error details:", err);
+      if (err instanceof TypeError && err.message.toLowerCase().includes("fetch")) {
+        setErrorMessage(
+          "Network connectivity lost. Please check your internet connection and try again, or contact us via WhatsApp."
+        );
+      } else {
+        setErrorMessage(
+          err instanceof Error ? err.message : "A network error occurred. Please try again or contact us via WhatsApp."
+        );
+      }
     } finally {
       setSubmitting(false);
     }
